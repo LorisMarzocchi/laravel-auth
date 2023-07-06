@@ -14,7 +14,6 @@
 
         "@popperjs/core": "^2.11.8",
 
-        "autoprefixer": "^10.4.2",
 
         "axios": "^0.25",
 
@@ -22,7 +21,6 @@
 
         "laravel-vite-plugin": "^0.6.0",
 
-        "lodash": "^4.17.19",
 
         "sass": "^1.63.6",
 
