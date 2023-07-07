@@ -1,19 +1,19 @@
 @extends('admin.layouts.base')
 
 @section('contents')
-    {{-- <h1 class="text-center text-danger p-3">Comics List:</h1>
+    <h1 class="text-center text-danger p-3">Comics List:</h1>
     @if (session('delete_success'))
-        @php $comic = session('delete_success') @endphp
+        @php $project = session('delete_success') @endphp
         <div class="alert alert-danger">
-            Comic '{{ $comic->title }}' has been cancelled
-            <form action="{{ route('comics.restore', ['comic' => $comic]) }}" method="POST">
+            Project '{{ $project->title }}' has been cancelled
+            {{-- <form action="{{ route('projects.restore', ['project' => $project]) }}" method="POST">
                 @csrf
                 <button class="btn btn-warning">Restore</button>
-            </form>
+            </form> --}}
         </div>
     @endif
 
-    @if (session('restore_success'))
+    {{-- @if (session('restore_success'))
         @php $comic = session('restore_success') @endphp
         <div class="alert alert-success">
             Comic '{{ $comic->title }}' has been restored
@@ -39,23 +39,55 @@
                 <tr>
                     <th scope="row">{{ $project->title }}</th>
                     <td>{{ $project->url_image }}</td>
+                    {{-- <td><img class="img-thumbnail" src="{{ $project->url_image }}" alt="{{ $project->title }}" style="width: 200px;"></td> --}}
                     <td>{{ $project->description }}</td>
                     <td>{{ $project->languages }}</td>
                     <td>{{ $project->link_github }}</td>
                     <td class="d-flex">
-                        <a class="btn btn-primary me-2" href="{{ route('admin.projects.show', ['project' => $project->id]) }}">View</a>
-                        <a class="btn btn-warning me-2" href="{{ route('admin.projects.edit', ['project' => $project->id]) }}">Edit</a>
-                        <form class=" d-inline-block " action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}"
+                        <a class="btn btn-primary me-2" href="{{ route('admin.projects.show', ['project' => $project]) }}">View</a>
+                        <a class="btn btn-warning me-2" href="{{ route('admin.projects.edit', ['project' => $project]) }}">Edit</a>
+                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->id }}">
+                            Delete
+                        </button>
+                        {{-- <form class=" d-inline-block " action="{{ route('admin.projects.destroy', ['project' => $project]) }}"
                             method="POST">
                             @csrf
                             @method('delete')
                             <button class="btn btn-danger">Delete</button>
-                        </form>
+                        </form> --}}
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete confirmation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <form
+                        id="confirm-delete"
+                        action=""
+                        method="post"
+                        data-template="{{ route('admin.projects.destroy', ['project' => '*****']) }}"
+
+
+                        class="d-inline-block"
+                    >
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-danger">Yes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     {{ $projects->links() }}
 
     {{--

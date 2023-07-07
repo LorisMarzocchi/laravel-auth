@@ -8,6 +8,21 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+
+    private $validation = [
+        'title' => 'required|string|max:50',
+        'url_image' => 'required|url|max:250',
+        'description' => 'required|string',
+        'languages' => 'required|string|max:50',
+        'link_github' => 'required|url|max:150',
+    ];
+    private $validation_messages =[
+        'required'    => 'il campo :attribute è obbligatorio',// per personalizzare il messaggio di errore
+        'min'    => 'il campo :attribute deve avere :min carattri',
+        'max'    => 'il campo :attribute deve avere :max carattri',
+        'url'   => 'il campo è obbligatorio',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +41,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -37,7 +52,35 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validation, $this->validation_messages);
+        // $request->validate([
+        //     'title' => 'required|string|max:50',
+        //     'url_image' => 'required|url|max:250',
+        //     'description' => 'required|string',
+        //     'languages' => 'required|string|max:50',
+        //     'link_github' => 'required|url|max:150',
+
+        // ],
+        // [
+        //     'required'    => 'il campo :attribute è obbligatorio',// per personalizzare il messaggio di errore
+        //     'min'    => 'il campo :attribute deve avere :min carattri',
+        //     'max'    => 'il campo :attribute deve avere :max carattri',
+        //     'url'   => 'il campo è obbligatorio',
+        // ]
+
+    // );
+
+        $data= $request->all();
+
+        $newProject = new Project();
+        $newProject->title = $data['title'];
+        $newProject->url_image = $data['url_image'];
+        $newProject->description = $data['description'];
+        $newProject->languages = $data['languages'];
+        $newProject->link_github = $data['link_github'];
+        $newProject->save();
+
+        return to_route('admin.projects.show', ['project' => $newProject]);
     }
 
     /**
@@ -59,7 +102,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -71,7 +114,19 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $request->validate($this->validation, $this->validation_messages);
+
+        $data= $request->all();
+
+
+        $project->title = $data['title'];
+        $project->url_image = $data['url_image'];
+        $project->description = $data['description'];
+        $project->languages = $data['languages'];
+        $project->link_github = $data['link_github'];
+        $project->update();
+
+        return to_route('admin.projects.show', ['project' => $project]);
     }
 
     /**
@@ -82,6 +137,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return to_route('admin.projects.index')->with('delete_success', $project);
     }
 }
