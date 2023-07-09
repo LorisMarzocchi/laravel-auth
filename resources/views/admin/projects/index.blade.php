@@ -28,7 +28,7 @@
         <thead>
             <tr>
                 <th scope="col">Title</th>
-                <th scope="col">Link image</th>
+                <th scope="col">Image</th>
                 <th scope="col">Description</th>
                 <th scope="col">Languages</th>
                 <th scope="col">Link Github</th>
@@ -38,12 +38,12 @@
             @foreach ($projects as $project)
                 <tr>
                     <th scope="row">{{ $project->title }}</th>
-                    <td>{{ $project->url_image }}</td>
-                    {{-- <td><img class="img-thumbnail" src="{{ $project->url_image }}" alt="{{ $project->title }}" style="width: 200px;"></td> --}}
-                    <td>{{ $project->description }}</td>
+                    {{-- <td>{{ $project->url_image }}</td> --}}
+                    <td><img class="img-thumbnail" src="{{ $project->url_image }}" alt="{{ $project->title }}" style="width: 200px;"></td>
+                    <td class="text-center">{{ $project->description }}</td>
                     <td>{{ $project->languages }}</td>
-                    <td>{{ $project->link_github }}</td>
-                    <td class="d-flex">
+                    <td><a class=" text-decoration-none " href="{{ $project->link_github }}">{{ $project->link_github }}"</a></td>
+                    <td class="d-flex mt-4">
                         <a class="btn btn-primary me-2" href="{{ route('admin.projects.show', ['project' => $project]) }}">View</a>
                         <a class="btn btn-warning me-2" href="{{ route('admin.projects.edit', ['project' => $project]) }}">Edit</a>
                         <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->id }}">
@@ -74,9 +74,9 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                     <form
                         id="confirm-delete"
-                        action=""
+                        action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}"
                         method="post"
-                        data-template="{{ route('admin.projects.destroy', ['project' => '*****']) }}"
+                        {{-- data-template="{{ route('admin.projects.destroy', ['project' => '*****']) }}" --}}
 
 
                         class="d-inline-block"

@@ -11,7 +11,7 @@
     </div>
 @endif --}}
     <h1>Inserisci nuovo Progetto</h1>
-    <form method="POST" action="{{ route('admin.projects.update', ['project' => $project]) }}">
+    <form class="w-75 m-auto" method="POST" action="{{ route('admin.projects.update', ['project' => $project]) }}">
         @method('put')
         @csrf
         <div class="mb-3">

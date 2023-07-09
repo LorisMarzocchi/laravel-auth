@@ -11,7 +11,7 @@ return [
     [
         "title"            => "Spotify Web",
         "url_image"        => "https://picsum.photos/id/1/200/300",
-        "description"      => "A clone of the spotify web interface",
+        "description"      => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae provident illum sapiente expedita beatae.",
         "languages"        => "HTML, CSS",
         "link_github"      => "https://github.com/LorisMarzocchi/html-css-spotifyweb",
     ],
@@ -24,14 +24,14 @@ return [
     ],
     [
         "title"            => "Vite Boolflix",
-        "url_image"        => "https://picsum.photos/id/10/200/300",
+        "url_image"        => "https://picsum.photos/id/11/200/300",
         "description"      => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae provident illum sapiente expedita beatae.",
         "languages"        => "HTML, SCSS, JAVASCRIPT, VUE",
         "link_github"      => "https://github.com/LorisMarzocchi/vite-boolflix",
     ],
     [
         "title"            => "Project Barber-Shop",
-        "url_image"        => "https://picsum.photos/id/150/200/300",
+        "url_image"        => "https://picsum.photos/id/" . rand(1,270) . "/200/300",
         "description"      => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae provident illum sapiente expedita beatae.",
         "languages"        => "HTML, SCSS, VUE, JAVASCRIPT ",
         "link_github"      => "https://github.com/LorisMarzocchi/proj-html-vuejs",

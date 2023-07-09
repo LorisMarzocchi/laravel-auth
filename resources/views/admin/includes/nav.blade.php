@@ -1,4 +1,6 @@
 @php $user = Auth::user(); @endphp
+
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('guests.home') }}">Boolpress</a>
@@ -24,13 +26,13 @@
                     </ul>
                 </li>
             </ul>
-            <ul class="navbar-nav me-5 mb-2 mb-lg-0">
+            <ul class=" menuRight navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         {{ $user->name }}
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu me-5">
                         <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Edit profile</a></li>
 
                         <li>

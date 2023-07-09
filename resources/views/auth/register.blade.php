@@ -1,7 +1,7 @@
 @extends('guests.layouts.base')
 
 @section('contents')
-    <form method="POST" action="{{ route('register') }}">
+    <form class="w-25 m-auto" method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
@@ -62,7 +62,7 @@
         </div>
 
         <a href="{{ route('login') }}">Already Registered?</a>
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary ms-4">Register</button>
 
     </form>
 @endsection
